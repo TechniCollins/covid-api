@@ -4,15 +4,15 @@ from django.core.management.base import BaseCommand
 from webhooks.models import Case
 from datetime import datetime
 
-def openAsDict():
-    with open("/home/voyager/Desktop/covid-api/covid_dataset.csv") as fo:
+def openAsDict(file_path):
+    with open(file_path) as fo:
         # Merge first and second rows to use as dictionary keys
         data = list(csv.reader(fo))
         headers = ["state"]
         headers.extend(
             [f"{data[0][x]}-{data[1][x]}" for x in range(1, len(data[0]))]
         )
-    with open("/home/voyager/Desktop/covid-api/covid_dataset.csv") as fo:
+    with open(file_path) as fo:
         # Now read the data as a dictionary
         results = list(csv.DictReader(fo, fieldnames=headers))
         # Remove the first two rows and the last row
@@ -24,8 +24,13 @@ def openAsDict():
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument("file_path", type=str)
+
     def handle(self, *args, **options):
-        results = openAsDict()
+        file_path = options["file_path"]
+
+        results = openAsDict(file_path)
         final_results = {} # Keep track of the dates we've already seen
 
         for r in results:
