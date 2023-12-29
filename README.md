@@ -32,7 +32,7 @@ Get all data where deaths are less than 10
 `field_name` can be one of `date`, `state`, `tcin`, `tcfn`, `cured`, `death`
 
 
-`query` must be (any valid Django field lookup)[https://docs.djangoproject.com/en/5.0/ref/models/querysets/#field-lookups] for the specified `field_name`
+`query` must be [any valid Django field lookup](https://docs.djangoproject.com/en/5.0/ref/models/querysets/#field-lookups) for the specified `field_name`
 
 
 `value` can be:
