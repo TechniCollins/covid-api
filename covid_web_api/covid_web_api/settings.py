@@ -67,10 +67,10 @@ WSGI_APPLICATION = 'covid_web_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'coviddb',
-        'USER': 'covidbot',
-        'PASSWORD': 'covidBotPass',
-        'HOST': 'localhost',
+        'NAME': os.environ.get("DB_NAME", "coviddb"),
+        'USER': os.environ.get("DB_USER", "covidbot"),
+        'PASSWORD': os.environ.get("DB_PASS", "covidBotPass"),
+        'HOST': os.environ.get("DB_HOST", "localhost"),
         'PORT': 5432,
     }
 }
